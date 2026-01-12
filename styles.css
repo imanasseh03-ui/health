@@ -1,3 +1,7 @@
+.navbar .container-fluid {
+    justify-content: center;
+}
+
 .doctor-img {
     max-width: 270px;
     border: 2px solid #198754;
@@ -70,16 +74,27 @@
 
 .appointment-container {
     margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .appointment-container h2 {
     text-transform: uppercase;
+    text-align: left;
+    font-size: 2.5rem;
+    white-space: nowrap;
+}
+.appointment-container p {
+    max-width: 400px;
+    font-size: 1.2rem;
+    text-align: left
 }
 
 .icons-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .icons-container div {
@@ -91,10 +106,33 @@
 }
 
 .icons-container i {
-    border: 1px solid #198754;
+    border: 1px solid transparent;
     border-radius: 50%;
     padding: 20px;
     margin: 0 10px;
     font-size: 30px;
     color: #198754;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.book-now-btn {
+    background-color: #198754;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-family: serif;
+}
+
+.appointment-container p {
+    font-size: 1.2rem;
+}
+
+.appointment-container strong {
+    font-size: 1.1rem;
+}
+
+.urgent-care-container {
+    background-color: #198754;
+    border-radius: 15px;
 }
