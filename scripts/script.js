@@ -2,28 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchBtn = document.querySelector('.js-search-btn');
   const searchInput = document.querySelector('#search-input');
   const serviceCards = document.querySelectorAll('.services-container .card');
+  const servicesRow = document.querySelector('.services-container');
 
   // Guard clause (prevents JS errors)
   if (!searchBtn || !searchInput || serviceCards.length === 0) return;
 
-  searchBtn.addEventListener('click', () => {
-    const query = searchInput.value.trim().toLowerCase();
+  //create 'no results' message element
+  const noResultsMsg = document.createElement('p');
+  noResultsMsg.textContent = 'no service found.';
+  noResultsMsg.className = 'text-center mt-4 fw-bold';
+  noResultsMsg.style.display = 'none';
+    servicesRow.appendChild(noResultsMsg);
 
-    serviceCards.forEach(card => {
-      const text = card.innerText.toLowerCase();
+    function filterServices() {
+        const query = searchInput.value.trim().toLowerCase();
+        let matchFound = false;
 
-      if (text.includes(query)) {
-        card.parentElement.style.display = 'block';
-      } else {
-        card.parentElement.style.display = 'none';
-      }
-    });
-  });
+        serviceCards.forEach(card => {
+            const cardText = card.innerText.toLowerCase();
 
-  // Optional: search while typing
-  searchInput.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-      searchBtn.click();
+            if (cardText.includes(query)) {
+                card.parentElement.style.display = 'block';
+                matchFound = true;
+            } else {
+                card.parentElement.style.display = 'none';
+            }
+        });
+        
+        noResultsMsg.style.display = matchFound ? 'none' : 'block';
     }
-  });
+
+    //button click search
+    searchBtn.addEventListener('click', filterServices);
+
+    //enter key search
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            filterServices();
+        }
+    });
 });
