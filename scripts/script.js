@@ -42,3 +42,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    /* =========================
+     APPOINTMENT BOOKING MODAL
+  ========================= */
+
+  const bookBtn = document.querySelector('.js-book-now-btn');
+  const appointmentform = document.querySelector('#appointment-form');
+  const successMsg = document.querySelector('#appointment-success');
+  const modalElement = document.getElementById('appointmentModal');
+  
+  if (bookBtn && appointmentform && successMsg && modalElement) {
+    const modal = new bootstrap.Modal(modalElement);
+
+    //open modal
+    bookBtn.addEventListener('click', () => {
+        modal.show();
+    });
+
+    //handle form submission
+    appointmentform.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const fullName = document.querySelector('#full-name').value.trim();
+        const email = document.querySelector('#email').value.trim();
+        const service = document.querySelector('#service').value;
+        const date = document.querySelector('#date').value;
+
+        if (!fullName || !email || !service || !date) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        successMsg.classList.remove('d-none');
+        appointmentform.reset();
+
+        setTimeout(() => {
+            modal.hide();
+             successMsg.classList.add('d-none');
+        
+        }, 2000);
+    });
+
+ }
+});
