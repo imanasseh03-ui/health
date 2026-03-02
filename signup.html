@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up - health is wealth</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style/signup.css">
+</head>
+<body>
+    <header class="auth-header">
+        <a class="brand" href="index.html"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>  health is wealth</a>
+        <div class="user-area" aria-live="polite"></div>
+    </header>
+    <main class="auth-main">
+        <form id="signup-form" class="login-form" action="#" method="post" autocomplete="on">
+            <h1>Create Account</h1>
+            <label for="firstname">First Name</label>
+            <input id="firstname" name="firstname" type="text" placeholder="Jane" required>
+
+            <label for="middlename">Middle Name</label>
+            <input id="middlename" name="middlename" type="text" placeholder="patric">
+
+            <label for="lastname">Last Name</label>
+            <input id="lastname" name="lastname" type="text" placeholder="johnson" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" placeholder="+234 8165 547 890" required>
+
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+
+            <label for="password">Create Password</label>
+            <input id="password" name="password" type="password" placeholder="Create a password" required>
+
+            <label for="confirm-password">Confirm Password</label>
+            <input id="confirm-password" name="confirm-password" type="password" placeholder="Repeat your password" required>
+
+            <div id="form-msg" role="status" aria-live="polite"></div>
+
+            <button type="submit" class="btn-primary"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> Create account</button>
+            <p class="muted">Already have an account? <a href="login.html">Log in</a></p>
+        </form>
+    </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="scripts/signup.js"></script>
+
+</body>
+</html>

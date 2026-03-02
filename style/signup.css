@@ -1,0 +1,191 @@
+/* =========================
+   AUTH GLOBAL STYLES
+========================= */
+
+body {
+  background: linear-gradient(135deg, #e8f6ef, #ffffff);
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.auth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.auth-header .brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #198754;
+  text-decoration: none;
+}
+
+.auth-header i {
+  margin-right: 6px;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.auth-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+
+.login-form {
+  background: #ffffff;
+  padding: 2.2rem;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #198754;
+}
+
+/* =========================
+   LABELS & INPUTS
+========================= */
+
+.login-form label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.login-form input,
+.login-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.login-form input:focus,
+.login-form select:focus {
+  outline: none;
+  border-color: #198754;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-primary {
+  width: 100%;
+  margin-top: 1.6rem;
+  padding: 12px;
+  border-radius: 30px;
+  background-color: #198754;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(25, 135, 84, 0.25);
+}
+
+/* =========================
+   LINKS & TEXT
+========================= */
+
+.muted {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.muted a {
+  color: #198754;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.muted a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   FORM MESSAGES
+========================= */
+
+#form-msg {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-error {
+  color: #dc3545;
+}
+
+.form-success {
+  color: #198754;
+}
+
+/* =========================
+   INVALID INPUT STATE
+========================= */
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 576px) {
+  .login-form {
+    padding: 1.6rem;
+  }
+
+  .login-form h1 {
+    font-size: 1.5rem;
+  }
+}
