@@ -86,4 +86,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
  }
+
+ /* =========================
+   NAVBAR AUTH STATE
+========================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const authArea = document.getElementById('auth-area');
+    if(!authArea) return;
+
+    const CURRENT_USER_KEY = 'health_current_user';
+    const current = localStorage.getItem(CURRENT_USER_KEY);
+
+    if(current) return;
+
+    try{
+        const user = JSON.parse(current);
+
+        //Get name (fallback order)
+        const name = 
+        user.firstName || 
+        user.fullname || 
+        user.email.split('@')[0];
+
+        authArea.innerHTML = `
+        <span class="me-3 fw-bold text-success">
+        👋 Hi, ${name}
+        </span>
+        <button class="btn btn-sm btn-outline-success ms-2" id="logout-btn">Logout</button>
+        `;
+        
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+
+        });
+        
+    } catch(e) {
+        console.error('invalid user data');
+    }
+});
+
+
 });

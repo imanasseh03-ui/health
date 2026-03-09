@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
      HELPERS
   ========================= */
 
-  const showError = (test) => {
-    msg.textContent = test;
+  const showError = (text) => {
+    msg.textContent = text;
     msg.className = 'form-error';
   };
 
@@ -58,13 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-    } catch{}
+    } catch (error) {
+        console.error('invalid user data');
+    }
+
 
     /* =========================
      FORM SUBMIT
   ========================= */
 
-    form.addEventListener('submit', (e) => {});
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         clearState();
 
@@ -92,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 u => u.email.toLowerCase() === email.toLowerCase() &&
                  u.password === password
             );
-            if(user){
+            if(!user){
                 showError('invalid email or password');
                 return;
             }
@@ -106,6 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch{
             showError('Something went wrong. Please try again.');
         }
-    
+    });
 
 });
