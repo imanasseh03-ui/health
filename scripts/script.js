@@ -46,46 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* =========================
-     APPOINTMENT BOOKING MODAL
-  ========================= */
+ /// =========================
+    // APPOINTMENT BOOKING
 
-  const bookBtn = document.querySelector('.js-book-now-btn');
-  const appointmentForm = document.querySelector('#appointment-form');
-  const successMsg = document.querySelector('#appointment-success');
-  const modalElement = document.getElementById('appointmentModal');
 
-  if (bookBtn && appointmentForm && successMsg && modalElement) {
 
-    const modal = new bootstrap.Modal(modalElement);
-
-    bookBtn.addEventListener('click', () => {
-      modal.show();
-    });
-
-    appointmentForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const fullName = document.querySelector('#full-name').value.trim();
-      const email = document.querySelector('#email').value.trim();
-      const service = document.querySelector('#service').value;
-      const date = document.querySelector('#date').value;
-
-      if (!fullName || !email || !service || !date) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-
-      successMsg.classList.remove('d-none');
-      appointmentForm.reset();
-
-      setTimeout(() => {
-        modal.hide();
-        successMsg.classList.add('d-none');
-      }, 2000);
-    });
-  }
-
+    
 
   /* =========================
         NAVBAR AUTH STATE
@@ -103,10 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const user = JSON.parse(current);
 
-        const name =
-          user.firstName ||
-          user.fullname ||
-          user.email.split('@')[0];
+       const name =
+        user.firstName ||
+        (user.fullname ? user.fullname.split(' ')[0] : null) ||
+        user.email.split('@')[0];
+
 
         authArea.innerHTML = `
           <span class="me-3 fw-bold text-success">

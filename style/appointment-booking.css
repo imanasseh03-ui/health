@@ -1,0 +1,97 @@
+/* Page Layout */
+body{
+  background: linear-gradient(135deg,#eef6f3,#f7fbfa);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Book Appointment Button */
+.js-book-now-btn{
+  padding:14px 30px;
+  font-size:18px;
+  font-weight:600;
+  border-radius:10px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
+  transition:all 0.3s ease;
+}
+
+.js-book-now-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* Modal Box */
+.modal-content{
+  border-radius:14px;
+  border:none;
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* Modal Header */
+.modal-header{
+  background:#198754;
+  color:white;
+  border-top-left-radius:14px;
+  border-top-right-radius:14px;
+}
+
+/* Modal Title */
+.modal-title{
+  font-weight:600;
+}
+
+/* Labels */
+.form-label{
+  font-weight:600;
+  color:#444;
+}
+
+/* Inputs */
+.form-control,
+.form-select{
+  border-radius:8px;
+  padding:10px;
+  transition:0.2s;
+}
+
+/* Input Focus Effect */
+.form-control:focus,
+.form-select:focus{
+  border-color:#198754;
+  box-shadow:0 0 0 0.15rem rgba(25,135,84,0.25);
+}
+
+/* Submit Button */
+#appointment-form button{
+  margin-top:10px;
+  padding:12px;
+  font-weight:600;
+  border-radius:8px;
+  transition:0.3s;
+}
+
+#appointment-form button:hover{
+  background:#157347;
+  transform:translateY(-2px);
+}
+
+/* Success Message */
+#appointment-success{
+  text-align:center;
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+/* Toast Notification */
+.toast{
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.toast-body{
+  font-size:14px;
+  font-weight:500;
+}
