@@ -1,124 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book an appointment</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/appointment-booking.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book an Appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/appointment-booking.css">
 </head>
 <body>
-    
-    <!-- Book Appointment Button -->
-<button class="btn btn-success js-book-now-btn">
-  Book Appointment
-</button>
 
-<!-- Appointment Modal -->
-<div class="modal fade" id="appointmentModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <!-- Header -->
+  <header class="text-center py-5 bg-light">
+    <h1 class="display-5 fw-bold">Book Your Appointment</h1>
+    <p class="lead">Schedule your appointment and see all your upcoming bookings below.</p>
+  </header>
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title">Book Appointment</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="modal-body">
-
-        <form id="appointment-form">
-
-          <!-- Full Name -->
-          <div class="mb-3">
-            <label class="form-label">Full Name</label>
-            <input
-              type="text"
-              id="full-name"
-              class="form-control"
-              placeholder="Enter your full name"
-              required
-            >
-          </div>
-
-          <!-- Email -->
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input
-              type="email"
-              id="email"
-              class="form-control"
-              placeholder="Enter your email"
-              required
-            >
-          </div>
-
-          <!-- Service -->
-          <div class="mb-3">
-            <label class="form-label">Select Service</label>
-            <select id="service" class="form-select" required>
-              <option value="">Choose a service</option>
-              <option value="General Consultation">General Consultation</option>
-              <option value="Dental Checkup">Dental Checkup</option>
-              <option value="Eye Examination">Eye Examination</option>
-              <option value="Laboratory Test">Laboratory Test</option>
-            </select>
-          </div>
-
-          <!-- Date -->
-          <div class="mb-3">
-            <label class="form-label">Appointment Date</label>
-            <input
-              type="date"
-              id="date"
-              class="form-control"
-              required
-            >
-          </div>
-
-          <!-- Success Message -->
-          <p id="appointment-success" class="text-success fw-bold d-none"></p>
-
-          <!-- Submit Button -->
-          <button type="submit" class="btn btn-success w-100">
-            Confirm Appointment
-          </button>
-
-        </form>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Toast Notification -->
-<div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
-
-  <div id="appointmentToast" class="toast align-items-center text-bg-success border-0" role="alert">
-    
-    <div class="d-flex">
-      
-      <div class="toast-body" id="toast-message">
-        Appointment booked successfully!
-      </div>
-      
-      <button 
-        type="button" 
-        class="btn-close btn-close-white me-2 m-auto" 
-        data-bs-dismiss="toast">
-      </button>
-
-    </div>
-
+  <!-- Book Appointment Button -->
+  <div class="text-center my-4">
+    <button class="btn btn-success btn-lg js-book-now-btn">Book Appointment</button>
   </div>
 
-</div>
+  <!-- Appointment Modal -->
+  <div class="modal fade" id="appointmentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">Book Appointment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <form id="appointment-form">
+
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="full-name" class="form-control" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Select Service</label>
+              <select id="service" class="form-select" required>
+                <option value="">Choose a service</option>
+                <option value="General Consultation">General Consultation</option>
+                <option value="Dental Checkup">Dental Checkup</option>
+                <option value="Eye Examination">Eye Examination</option>
+                <option value="Laboratory Test">Laboratory Test</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Appointment Date</label>
+              <input type="date" id="date" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Confirm Appointment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+    <div id="appointmentToast" class="toast align-items-center text-bg-success border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body" id="toast-message">Appointment booked successfully!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Appointments Section -->
+  <section class="container py-5">
+    <h2 class="mb-4 text-center">My Appointments</h2>
+    <div id="appointments-list" class="row g-4"></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts/appointment-booking.js"></script>
 
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="scripts/appointment-booking.js"></script>
 </html>
