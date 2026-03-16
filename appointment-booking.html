@@ -9,11 +9,58 @@
 </head>
 <body>
 
+  
+
   <!-- Header -->
   <header class="text-center py-5 bg-light">
     <h1 class="display-5 fw-bold">Book Your Appointment</h1>
     <p class="lead">Schedule your appointment and see all your upcoming bookings below.</p>
+
+    <div class="container mb-4">
+
+  <div class="row g-3">
+
+    <!-- Search -->
+    <div class="col-md-4">
+      <input 
+        type="text" 
+        id="search-appointment" 
+        class="form-control" 
+        placeholder="Search by patient name">
+    </div>
+
+    <!-- Filter by Service -->
+    <div class="col-md-4">
+      <select id="filter-service" class="form-select">
+        <option value="all">Filter by Service</option>
+        <option value="General Consultation">General Consultation</option>
+        <option value="Dental Checkup">Dental Checkup</option>
+        <option value="Eye Examination">Eye Examination</option>
+        <option value="Laboratory Test">Laboratory Test</option>
+      </select>
+    </div>
+
+    <!-- Sort -->
+    <div class="col-md-2">
+      <select id="sort-date" class="form-select">
+        <option value="none">Sort by Date</option>
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+      </select>
+    </div>
+
+    <!-- Clear All -->
+    <div class="col-md-2">
+      <button id="clear-appointments" class="btn btn-danger w-100">
+        Clear All
+      </button>
+    </div>
+
+  </div>
+
+</div>
   </header>
+
 
   <!-- Book Appointment Button -->
   <div class="text-center my-4">

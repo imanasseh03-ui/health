@@ -1,97 +1,102 @@
-/* Page Layout */
-body{
-  background: linear-gradient(135deg,#eef6f3,#f7fbfa);
+/* General Page Styling */
+body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  background: #f4f7fb;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  background: #e9f7ef;
 }
 
 /* Book Appointment Button */
-.js-book-now-btn{
-  padding:14px 30px;
-  font-size:18px;
-  font-weight:600;
-  border-radius:10px;
-  box-shadow:0 8px 18px rgba(0,0,0,0.15);
-  transition:all 0.3s ease;
+.js-book-now-btn {
+  padding: 16px 36px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
 }
 
-.js-book-now-btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.2);
+.js-book-now-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Modal Box */
-.modal-content{
-  border-radius:14px;
-  border:none;
-  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+/* Modal Styling */
+.modal-content {
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
-/* Modal Header */
-.modal-header{
-  background:#198754;
-  color:white;
-  border-top-left-radius:14px;
-  border-top-right-radius:14px;
+.modal-header {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
 }
 
-/* Modal Title */
-.modal-title{
-  font-weight:600;
+#appointment-form .form-control,
+#appointment-form .form-select {
+  border-radius: 8px;
+  padding: 10px;
 }
 
-/* Labels */
-.form-label{
-  font-weight:600;
-  color:#444;
+#appointment-form button {
+  margin-top: 10px;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
-/* Inputs */
-.form-control,
-.form-select{
-  border-radius:8px;
-  padding:10px;
-  transition:0.2s;
+/* My Appointments Section */
+#appointments-list {
+  margin-top: 20px;
 }
 
-/* Input Focus Effect */
-.form-control:focus,
-.form-select:focus{
-  border-color:#198754;
-  box-shadow:0 0 0 0.15rem rgba(25,135,84,0.25);
+#appointments-list .card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border: none;
+  position: relative;
 }
 
-/* Submit Button */
-#appointment-form button{
-  margin-top:10px;
-  padding:12px;
-  font-weight:600;
-  border-radius:8px;
-  transition:0.3s;
+#appointments-list .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
-#appointment-form button:hover{
-  background:#157347;
-  transform:translateY(-2px);
+/* Card Header Icon */
+#appointments-list .card h5::before {
+  content: "\f073"; /* Calendar icon (FontAwesome Unicode) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: #198754;
 }
 
-/* Success Message */
-#appointment-success{
-  text-align:center;
-  font-size:14px;
-  margin-bottom:10px;
+/* Delete Button */
+#appointments-list .delete-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+#appointments-list .delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 /* Toast Notification */
-.toast{
-  border-radius:10px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
-.toast-body{
-  font-size:14px;
-  font-weight:500;
+.toast-body {
+  font-weight: 600;
+  font-size: 1rem;
 }
