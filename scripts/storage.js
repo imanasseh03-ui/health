@@ -19,3 +19,31 @@ export function deleteAppointment(index) {
     appointments.splice(index, 1);
     saveAppointments(appointments);
 }
+
+export function updateAppointment(index, updates) {
+    const appointments = getAppointments();
+
+    appointments[index] = {
+       ...appointments[index],
+       ...updates
+    
+    };
+
+    saveAppointments(appointments);
+}
+
+export function updateStatus(index) {
+    const appointments = getAppointments();
+
+    const current = appointments[index].status;
+
+    if (current === 'pending') {
+        appointments[index].status = "confirmed";
+    } else if (current === "confirmed") {
+        appointments[index].status = "completed";
+    } else {
+        appointments[index].status = "pending";
+    }
+
+    saveAppointments(appointments);
+}

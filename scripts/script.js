@@ -48,9 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
  /// =========================
     // APPOINTMENT BOOKING
-
-
-
     
 
   /* =========================

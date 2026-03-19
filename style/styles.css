@@ -12,6 +12,11 @@
     color: white;
 }
 
+/* explicit spacing for appointment actions (fallback if Bootstrap classes aren’t working) */
+.status-btn + .delete-btn {
+    margin-left: 0.5rem !important;
+}
+
 .doctor-img {
    width: 100%;
   max-width: 260px;
