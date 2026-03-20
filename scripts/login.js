@@ -1,114 +1,74 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('login-form');
-    const msg = document.getElementById('form-msg');
-    const emailInput = document.getElementById('login-email');
-    const passwordInput = document.getElementById('login-password');
+  const form = document.getElementById('login-form');
+  const msg = document.getElementById('form-msg');
+  const emailInput = document.getElementById('login-email');
+  const passwordInput = document.getElementById('login-password');
 
-    const USER_KEY = 'health_users';
-    const CURRENT_USER_KEY = 'health_current_user';
+  const USER_KEY = 'health_users';
+  const CURRENT_USER_KEY = 'currentUser';
 
-    /* =========================
-     HELPERS
-  ========================= */
+  // ✅ Redirect if already logged in
+  const existingUser = localStorage.getItem(CURRENT_USER_KEY);
+  if (existingUser) {
+    window.location.href = 'index.html';
+  }
 
   const showError = (text) => {
     msg.textContent = text;
     msg.className = 'form-error';
   };
 
-    const showSuccess = (test) => {
-        msg.textContent = test;
-        msg.className = 'form-success';
-    };
+  const showSuccess = (text) => {
+    msg.textContent = text;
+    msg.className = 'form-success';
+  };
 
-    const isValidEmail = (email) =>
+  const isValidEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    const clearState = () => {
-        msg.textContent = '';
-        msg.className = '';
-        emailInput.classList.remove('is-invalid');
-        passwordInput.classList.remove('is-invalid');
-    };
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    /* =========================
-    AUTO LOGIN LOGIC
-  ========================= */
-    try{
-        const current = localStorage.getItem(CURRENT_USER_KEY);
-        if(current){
-            const user = JSON.parse(current);
-            if(user?.email){
-                form.innerHTML = `
-                <div class="form-success">
-                you are logged in as <strong>${user.email}</strong>
-                </div>
-                <div class="mt-3">
-                <a href="index.html" class="btn btn-primary">Go to site</a>
-                <button id="logout-btn" class="btn btn-outline-primary mt-2">Logout</button>
-                </div>
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
-                `;
-
-                document.getElementById('logout-btn').addEventListener('click', () => {
-                    localStorage.removeItem(CURRENT_USER_KEY);
-                    window.location.reload();
-                });
-            return;
-            }
-        }
-
-    } catch (error) {
-        console.error('invalid user data');
+    // ✅ Validation FIRST
+    if (!isValidEmail(email)) {
+      showError('Please enter a valid email');
+      return;
     }
 
+    if (password.length < 6) {
+      showError('Password must be at least 6 characters');
+      return;
+    }
 
-    /* =========================
-     FORM SUBMIT
-  ========================= */
+    try {
+      const usersRaw = localStorage.getItem(USER_KEY);
+      const users = usersRaw ? JSON.parse(usersRaw) : [];
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        clearState();
+      const user = users.find(
+        u =>
+          u.email.toLowerCase() === email.toLowerCase() &&
+          u.password === password
+      );
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+      if (!user) {
+        showError('Invalid email or password');
+        return;
+      }
 
-        //validation
-        if(!isValidEmail(email)){
-            emailInput.classList.add('is-invalid');
-            showError('Please enter a valid email address');
-            return;
-        }
-        if(password.length < 6){
-            passwordInput.classList.add('is-invalid');
-            showError('Password must be at least 6 characters');
-            return;
-        }
+      // ✅ Save logged-in user
+      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
 
-        try{
-            const usersRaw = localStorage.getItem(USER_KEY);
-            const users = usersRaw ? JSON.parse(usersRaw) : [];
-            
+      showSuccess('Login successful! Redirecting...');
 
-            const user = users.find(
-                u => u.email.toLowerCase() === email.toLowerCase() &&
-                 u.password === password
-            );
-            if(!user){
-                showError('invalid email or password');
-                return;
-            }
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1500);
 
-            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-            showSuccess('Login successful! Redirecting...');
-
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
-        } catch{
-            showError('Something went wrong. Please try again.');
-        }
-    });
-
+    } catch (error) {
+      showError('Something went wrong');
+    }
+  });
 });
