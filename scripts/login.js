@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+
   const form = document.getElementById('login-form');
-  const msg = document.getElementById('form-msg');
   const emailInput = document.getElementById('login-email');
   const passwordInput = document.getElementById('login-password');
+  const msg = document.getElementById('form-msg');
+  const btn = document.getElementById('login-btn');
+  const btnText = btn.querySelector('.btn-text');
+  const loader = btn.querySelector('.loader');
 
-  const USER_KEY = 'health_users';
   const CURRENT_USER_KEY = 'currentUser';
+  const USER_KEY = 'health_users';
 
-  // ✅ Redirect if already logged in
-  const existingUser = localStorage.getItem(CURRENT_USER_KEY);
-  if (existingUser) {
-    window.location.href = 'index.html';
-  }
+  const ADMIN_EMAIL = 'admin@health.com';
+  const ADMIN_PASSWORD = 'admin123';
 
   const showError = (text) => {
     msg.textContent = text;
@@ -23,8 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     msg.className = 'form-success';
   };
 
-  const isValidEmail = (email) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const toggleLoading = (isLoading) => {
+    loader.classList.toggle('hidden', !isLoading);
+    btnText.textContent = isLoading ? 'Logging in...' : 'Login';
+    btn.disabled = isLoading;
+  };
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -32,43 +36,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // ✅ Validation FIRST
-    if (!isValidEmail(email)) {
-      showError('Please enter a valid email');
-      return;
-    }
+    toggleLoading(true);
 
-    if (password.length < 6) {
-      showError('Password must be at least 6 characters');
-      return;
-    }
+    setTimeout(() => {
 
-    try {
-      const usersRaw = localStorage.getItem(USER_KEY);
-      const users = usersRaw ? JSON.parse(usersRaw) : [];
+      // ✅ Admin login
+      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify({
+          email,
+          role: 'admin'
+        }));
+
+        showSuccess('Admin login successful!');
+
+        return setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
+      }
+
+      const users = JSON.parse(localStorage.getItem(USER_KEY)) || [];
 
       const user = users.find(
-        u =>
-          u.email.toLowerCase() === email.toLowerCase() &&
-          u.password === password
+        u => u.email === email && u.password === password
       );
 
       if (!user) {
-        showError('Invalid email or password');
-        return;
+        toggleLoading(false);
+        return showError('Invalid email or password');
       }
 
-      // ✅ Save logged-in user
-      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify({
+        ...user,
+        role: 'user'
+      }));
 
-      showSuccess('Login successful! Redirecting...');
+      showSuccess('Login successful!');
 
       setTimeout(() => {
         window.location.href = 'index.html';
-      }, 1500);
+      }, 1000);
 
-    } catch (error) {
-      showError('Something went wrong');
-    }
+    }, 800); // simulate loading
+
   });
+
 });

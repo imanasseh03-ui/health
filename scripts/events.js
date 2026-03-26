@@ -2,76 +2,103 @@ import { addAppointment, deleteAppointment, updateAppointment, updateStatus } fr
 import { renderAppointments } from "./ui.js";
 
 export function setupEvents(modal, toast) {
-    const form = document.getElementById('appointment-form');
-    const bookBtn = document.querySelector('.js-book-now-btn');
-    const toastMessage = document.getElementById('toast-message');
 
-    //IMPORTANT GUARD
-    if (!form || !bookBtn || !toastMessage) {
-        console.log("missing elements: {form, bookBtn, toastMessage}")
-        return;
+  const form = document.getElementById('appointment-form');
+  const bookBtn = document.querySelector('.js-book-now-btn');
+  const toastMessage = document.getElementById('toast-message');
+
+  const CURRENT_USER_KEY = 'currentUser';
+
+  const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+
+  if (!currentUser) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  const userName =
+    currentUser.firstName ||
+    (currentUser.fullname ? currentUser.fullname.split(' ')[0] : '') ||
+    currentUser.email.split('@')[0];
+
+  if (!form || !bookBtn || !toastMessage) {
+    console.log("missing elements: {form, bookBtn, toastMessage}");
+    return;
+  }
+
+  const isAdmin = currentUser.role === 'admin';
+
+  // 👉 OPEN MODAL
+  bookBtn.addEventListener('click', () => modal.show());
+
+  // 👉 SUBMIT FORM
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const appointment = {
+      name: userName,
+      email: currentUser.email,
+      service: document.getElementById('service').value,
+      date: document.getElementById('date').value,
+      time: document.getElementById('time').value,
+      doctor: document.getElementById('doctor').value,
+      status: "pending"
+    };
+
+    addAppointment(appointment);
+
+    toastMessage.textContent = `✅ ${appointment.name} booked successfully`;
+    toast.show();
+
+    form.reset();
+    modal.hide();
+
+    renderAppointments();
+  });
+
+  // ✅ HANDLE ALL BUTTONS
+  document.addEventListener('click', (e) => {
+
+    const button = e.target.closest('button');
+    if (!button) return;
+
+    const index = button.dataset.index;
+    if (index === undefined) return;
+
+    // 👉 DELETE
+    if (button.classList.contains('delete-btn') && isAdmin) {
+      deleteAppointment(index);
+      toastMessage.textContent = "Appointment deleted";
+      toast.show();
+      renderAppointments();
     }
 
+    // 👉 STATUS
+    if (button.classList.contains('status-btn') && isAdmin) {
+      updateStatus(index);
+      toastMessage.textContent = "🔄 Status updated";
+      toast.show();
+      renderAppointments();
+    }
 
-    // 👉 OPEN MODAL
-    bookBtn.addEventListener('click', () => modal.show());
+    // 👉 EDIT
+    if (button.classList.contains('edit-btn') && isAdmin) {
+      const newDate = prompt('Enter new date:');
+      const newTime = prompt('Enter new time:');
 
-    // 👉 SUBMIT FORM
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+      if (newDate || newTime) {
+        updateAppointment(index, {
+          ...(newDate && { date: newDate }),
+          ...(newTime && { time: newTime })
+        });
 
-        const appointment = {
-            fullName: document.getElementById('full-name').value,
-            gender: document.getElementById('gender').value,
-            email: document.getElementById('email').value,
-            service: document.getElementById('service').value,
-            doctor: document.getElementById('doctor').value,
-            date: document.getElementById('date').value,
-            time: document.getElementById('time').value,
-            status: "pending"
-        };
-
-        addAppointment(appointment);
-
-         toastMessage.textContent = `✅ ${appointment.fullName} booked successfully`;
-         toast.show();
-
-         form.reset();
-         modal.hide();
+        toastMessage.textContent = "✏️ Appointment updated";
+        toast.show();
 
         renderAppointments();
-    });
+      }
+    }
 
-    // ✅ HANDLE ALL BUTTONS (IMPORTANT)
-    document.addEventListener('click', (e) => {
-
-        const index = e.target.dataset.index;
-
-     // 👉 DELETE APPOINTMENT
-   
-        if (e.target.classList.contains('delete-btn')) {
-            deleteAppointment(index);
-            renderAppointments();
-        }
-        // 👉 CHANGE STATUS
-        if (e.target.classList.contains('status-btn')) {
-            updateStatus(index);
-            renderAppointments();
-        }
-        // 👉 EDIT APPOINTMENT
-        if (e.target.classList.contains('edit-btn')) {
-            const newDate = prompt('Enter new date:');
-            const newTime = prompt('Enter new time:');
-
-            if (newDate || newTime) {
-                updateAppointment(index, {
-                    ...(newDate &&{ date: newDate}),
-                    ...(newTime &&{ time: newTime})
-            });
-                renderAppointments();
-            }
-        }
-
-    });
+  });
 
 }

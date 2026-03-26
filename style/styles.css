@@ -1,227 +1,297 @@
+/* =========================
+   BASE STYLING
+========================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9f5ef;
+    color: #333;
+    margin: 0;
+}
+
+/* =========================
+   NAVBAR
+========================= */
 .navbar .container-fluid {
     justify-content: space-between;
 }
+
 .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #198754;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.btn-success a {
-    text-decoration: none;
+
+.navbar .nav-link {
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #198754;
+}
+
+#auth-area .btn-success {
+    background-color: #198754;
     color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 5px 15px;
+    transition: 0.3s;
 }
 
-/* explicit spacing for appointment actions (fallback if Bootstrap classes aren’t working) */
-.status-btn + .delete-btn {
-    margin-left: 0.5rem !important;
+#auth-area .btn-success:hover {
+    background-color: #145c37;
 }
 
-.doctor-img {
-   width: 100%;
-  max-width: 260px;
-  height: auto;
-  display: block;
-
-  border: 3px solid #198754;
-  border-radius: 20px;
-
-  padding: 6px;
-  background-color: #fff;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-   display: block;
-  margin: 0 auto;
-}
-
-@media (max-width: 992px) {
-  .doctor-img {
-    margin: 0 auto;
-    max-width: 220px;
-  }
-}
-
+/* =========================
+   HERO SECTION
+========================= */
 .hero-container {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    padding: 60px 15px 50px 15px;
 }
 
 .hero-text-col {
-  padding-left: 3rem;
+    padding-left: 3rem;
 }
 
 @media (max-width: 768px) {
-  .hero-text-col {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    text-align: center;
-  }
+    .hero-text-col {
+        padding: 1rem;
+        text-align: center;
+    }
 }
 
 .hero-subtitle {
     color: #198754;
     text-transform: uppercase;
     font-weight: bold;
+    letter-spacing: 1px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 10px;
 }
 
 .hero-subtitle i {
     margin-right: 0.5rem;
 }
 
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-desc {
-    font-size: 1rem;
-    max-width: 100%;
-  }
+    .hero-title {
+        font-size: 2rem;
+    }
 }
 
-@media (max-width: 576px) {
-  .hero-title {
-    font-size: 1.7rem;
-  }
-}
-/* .hero-desc {
-    margin-top: 1rem;
+.hero-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-bottom: 25px;
     color: #555;
-    max-width: 90%;
-    font-size: 1.2rem;
-} */
-
-.search-btn {
-    background-color: #198754;
-    color: white;
 }
 
+@media (max-width: 768px) {
+    .hero-desc {
+        max-width: 100%;
+    }
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
 .search-bar {
-    background-color: transparent;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
     display: flex;
     align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .search-bar i {
     margin-right: 10px;
-    color: #555;
-}
-
-.search-bar span {
-    color: #777;
-}
-
-@media (max-width: 576px) {
-  .see-more-btn {
-    margin-left: 0;
-    margin-top: 10px;
     color: #198754;
-  }
+    font-size: 1.2rem;
 }
 
-@media (max-width: 992px) {
-  .appointment-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .appointment-container h2,
-  .appointment-container p {
-    text-align: center;
-    white-space: normal;
-  }
-}
-@media (max-width: 768px) {
-  .icons-container {
-    align-items: center;
-  }
-
-  .icons-container div {
-    justify-content: center;
-  }
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
 }
 
-.icons-container div:first-child {
-    margin-bottom: 20px;
-}
-
-.icons-container i {
-    border: 1px solid transparent;
-    border-radius: 50%;
-    padding: 20px;
-    margin: 0 10px;
-    font-size: 30px;
-    color: #198754;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.book-now-btn {
+/* =========================
+   BUTTONS
+========================= */
+.search-btn {
     background-color: #198754;
     color: white;
-    font-size: 1.5rem;
-    padding: 10px 30px;
-    border-radius: 30px;
-    font-family: serif;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #145c37;
+}
+
+.see-more-btn {
+    background-color: #fff;
+    color: #198754;
+    border: 1px solid #198754;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.see-more-btn:hover {
+    background-color: #198754;
+    color: #fff;
+}
+
+/* =========================
+   DOCTOR IMAGE
+========================= */
+.doctor-img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    border-radius: 20px;
+    border: 3px solid #198754;
+    padding: 6px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
+}
+
+.doctor-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   APPOINTMENT SECTION
+========================= */
+.appointment-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.appointment-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #198754;
 }
 
 .appointment-container p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
 }
 
 .appointment-container strong {
     font-size: 1.1rem;
 }
 
-.urgent-care-container {
+.book-now-btn {
     background-color: #198754;
-    border-radius: 15px;
+    color: white;
+    font-size: 1.3rem;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-.search-bar input {
-    border: none;
-    background-color: transparent;
-    width: 100%;
+.book-now-btn:hover {
+    background-color: #145c37;
 }
-
-.search-bar input:focus {
-    outline: none;
-}
-
 
 /* =========================
-   RESPONSIVE FIXES
+   ICONS
 ========================= */
+.icons-container div {
+    display: flex;
+    justify-content: start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
+.icons-container i {
+    font-size: 2rem;
+    color: #198754;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.icons-container i:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   URGENT CARE
+========================= */
+.urgent-care-container {
+    background-color: #198754;
+    color: #fff;
+    padding: 40px 20px;
+    border-radius: 15px;
+    margin-top: 3rem;
+}
+
+.urgent-care-container p {
+    line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 992px) {
-  .doctor-img {
-    margin: 0 auto;
-  }
+    .appointment-container {
+        flex-direction: column;
+        text-align: center;
+    }
 
-  .appointment-container {
-    flex-direction: column;
-    gap: 2rem;
-  }
+    .doctor-img {
+        max-width: 220px;
+    }
+
+    .icons-container div {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
-  .hero-text-col {
-    padding: 1rem;
-    text-align: center;
-  }
-
-  .icons-container {
-    align-items: center;
-  }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-desc {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 576px) {
-  .hero-title {
-    font-size: 1.7rem;
-  }
+    .hero-title {
+        font-size: 1.7rem;
+    }
 }

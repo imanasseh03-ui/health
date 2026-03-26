@@ -1,75 +1,143 @@
-.auth-header{
-    height:var(--nav-height);
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding:0 1rem;
-    background:#f8f9fa;
+:root {
+  --primary: #198754;        /* main green */
+  --primary-dark: #157347;
+  --primary-light: #20c997;
+  --bg-light: #f4fdf7;       /* soft green background */
+  --white: #ffffff;
+  --border: #d1e7dd;
+  --danger: #dc3545;
+  --success: #198754;
 }
-.auth-header .brand{
-    font-weight:700;
-    color:green;
-    text-decoration:none;
-    font-size:1.1rem;
+
+/* 🌍 Background */
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-light); /* ✅ soft green instead of gradient */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
-.auth-main{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:calc(100vh - var(--nav-height));
-    padding:1rem;
-    background:#fff;
-}   
-.login-form{
-    width:100%;
-    max-width:360px;
-    border-radius:8px;
-    padding:24px;
-    background:#ffffff;
-    border:1px solid #e6e9ef;
-    box-shadow:0 6px 18px rgba(0,0,0,0.06);
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+
+.auth-header {
+  position: fixed;       /* stick to top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f4fdf7; /* soft green background */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  z-index: 1000;
 }
-.login-form h1{
-    margin:0 0 8px;
-    font-size:1.25rem
+
+.auth-header .brand {
+  color: #198754;       /* green color */
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none; /* remove underline */
 }
-.login-form label{
-    font-size:.9rem;
+
+.auth-header .brand i {
+  margin-right: 8px;
+  color: #198754;       /* icon matches text */
 }
-.login-form input{
-    height:42px;
-    padding:6px 10px;
-    border-radius:6px;
-    border:1px solid #dcdfe6;
+
+.auth-header .user-area {
+  font-size: 16px;
+  color: #198754;       /* user name in green */
+  font-weight: bold;
 }
-.btn-primary{
-    background:green;
-    color:white;
-    border:0;
-    padding:10px 12px;
-    border-radius:6px;
-    cursor:pointer}
-.btn-primary:hover{
-    background:green;
+
+/* 📦 Login Card */
+.login-card {
+  background: var(--white);
+  padding: 30px;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
-.muted{
-    font-size:.9rem;
-    color:#666;
+
+/* 🏷 Title */
+.login-card h2 {
+  margin-bottom: 5px;
+  color: var(--primary);
 }
-.form-error{
-    color:#b00020;
-    background:rgba(176,0,32,0.06);
-    padding:.5rem;
-    border-radius:6px;
-    margin:4px 0;
+
+.subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 20px;
 }
-.form-success{
-    color:#0b6623;
-    background:rgba(11,102,35,0.06);
-    padding:.5rem;
-    border-radius:6px;
-    margin:4px 0;
+
+/* 🧾 Inputs */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(25, 135, 84, 0.1);
+}
+
+/* 🔘 Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+/* 🔄 Loader */
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 3px solid white;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ❌ Error */
+.form-error {
+  color: var(--danger);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* ✅ Success */
+.form-success {
+  color: var(--success);
+  font-size: 14px;
+  margin-top: 10px;
 }
