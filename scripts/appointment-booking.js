@@ -28,4 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup all events
   setupEvents(modal, toast);
 
+  const role = currentUser.role || 'user';
+
+  if (role === 'admin') {
+    document.querySelectorAll('.admin-only').forEach((el) => el.classList.remove('hidden'));
+  }
+
 });

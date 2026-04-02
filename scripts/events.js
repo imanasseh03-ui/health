@@ -35,6 +35,28 @@ export function setupEvents(modal, toast) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    const patientInput = document.getElementById('patient-name');
+
+    let patientName;
+
+    //Admin booking
+    if (isAdmin) {
+      if (!patientInput || patientInput.value.trim()) {
+        toastMessage.textContent = " Please enter patient name";
+        toast.show();
+        return;
+      }
+      patientName = patientInput.value.trim();
+    } else {
+      //Normal user
+      patientName =
+        currentUser.firstName ||
+        (currentUser.fullname 
+          ? currentUser.fullname.split(' ')[0] 
+          : currentUser.email.split('@')[0]);
+        
+    }
+
     const appointment = {
       name: userName,
       email: currentUser.email,
