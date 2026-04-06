@@ -79,19 +79,28 @@
         <div class="modal-body">
           <form id="appointment-form">
 
-            <div class="input-group admin-only hidden mb-3">
-              <label for="patient-name" class="form-label">Patient Name</label>
-                <input 
-                  type="text" 
-                  id="patient-name" 
-                  class="form-control"
-                  placeholder="Enter patient's name" 
-                />
+            <div class="input-group admin-only d-none mb-3" id="patient-select-group">
+              <label for="patient-select" class="form-label">Select Patient</label>
+                <select 
+                  id="patient-select" 
+                  class="form-select"
+                  required
+                >
+                  <option value="">Choose a patient</option>
+                </select>
               </div> 
 
-            <div class="mb-3">
+            <div class="mb-3" id="email-group">
               <label class="form-label">Email</label>
               <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-3 d-none" id="account-summary">
+              <label class="form-label">Booking For</label>
+              <div class="form-control bg-light">
+                <strong id="account-name"></strong><br>
+                <small id="account-email" class="text-muted"></small>
+              </div>
             </div>
 
             <div class="mb-3">

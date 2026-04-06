@@ -1,10 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   const CURRENT_USER_KEY = 'currentUser';
-
-  /* =========================
-        AUTH CHECK
-  ========================= */
 
   let currentUser;
 
@@ -19,24 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  /* =========================
-        LOAD APPOINTMENTS FIRST
-  ========================= */
-
   const appointments =
     JSON.parse(localStorage.getItem('health-appointments')) || [];
 
   const pendingCount =
-    appointments.filter(a => a.status === 'pending').length;
-
-  /* =========================
-        NAVBAR AUTH STATE
-  ========================= */
+    appointments.filter((a) => a.status === 'pending').length;
 
   const authArea = document.getElementById('auth-area');
 
   if (authArea) {
-
     const name =
       currentUser.firstName ||
       (currentUser.fullname ? currentUser.fullname.split(' ')[0] : null) ||
@@ -46,17 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     authArea.innerHTML = `
       <div class="d-flex align-items-center gap-3">
-
-        <!-- 🔔 Notification Bell -->
-        <div class="notification-bell position-relative">
-          <i class="fa-solid fa-bell fs-5"></i>
+        <div class="notification-bell position-relative dropdown">
+          <i class="fa-solid fa-bell fs-5 dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;"></i>
           ${pendingCount > 0 ? `<span class="notif-badge">${pendingCount}</span>` : ''}
+          <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 300px;">
+            <li class="dropdown-header">Notifications</li>
+            <li><hr class="dropdown-divider"></li>
+            ${pendingCount > 0 ? appointments.filter((a) => a.status === 'pending').map((appt) => `
+              <li class="dropdown-item">
+                <strong>${appt.service}</strong><br>
+                <small>${appt.name} - ${appt.date} at ${appt.time}</small>
+              </li>
+            `).join('') : '<li class="dropdown-item text-muted">No new notifications</li>'}
+          </ul>
         </div>
 
-        <!-- 👤 User Dropdown -->
         <div class="dropdown">
           <button class="btn user-btn dropdown-toggle" data-bs-toggle="dropdown">
-            👤 ${name}
+            ${name}
             ${role === 'admin' ? '<span class="admin-badge">ADMIN</span>' : ''}
           </button>
 
@@ -69,18 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ${
               role === 'admin'
-                ? `<li><a class="dropdown-item text-success" href="admin.html">⚙️ Admin Dashboard</a></li>`
+                ? '<li><a class="dropdown-item text-success" href="admin.html">Admin Dashboard</a></li>'
                 : ''
             }
 
             <li>
               <button class="dropdown-item text-danger" id="logout-btn">
-                🚪 Logout
+                Logout
               </button>
             </li>
           </ul>
         </div>
-
       </div>
     `;
 
@@ -89,10 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'login.html';
     });
   }
-
-  /* =========================
-        UPCOMING APPOINTMENT
-  ========================= */
 
   const appointmentEl = document.getElementById('next-appointment');
 
@@ -106,5 +94,4 @@ document.addEventListener('DOMContentLoaded', () => {
       appointmentEl.textContent = 'No upcoming appointments';
     }
   }
-
 });

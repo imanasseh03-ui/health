@@ -2,64 +2,51 @@ import { addAppointment, deleteAppointment, updateAppointment, updateStatus } fr
 import { renderAppointments } from "./ui.js";
 
 export function setupEvents(modal, toast) {
-
   const form = document.getElementById('appointment-form');
   const bookBtn = document.querySelector('.js-book-now-btn');
   const toastMessage = document.getElementById('toast-message');
-
-  const CURRENT_USER_KEY = 'currentUser';
-
-  const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   if (!currentUser) {
     window.location.href = 'login.html';
     return;
   }
 
-  const userName =
-    currentUser.firstName ||
-    (currentUser.fullname ? currentUser.fullname.split(' ')[0] : '') ||
-    currentUser.email.split('@')[0];
-
   if (!form || !bookBtn || !toastMessage) {
-    console.log("missing elements: {form, bookBtn, toastMessage}");
+    console.log("Missing elements: form, bookBtn, or toastMessage");
     return;
   }
 
   const isAdmin = currentUser.role === 'admin';
+  const fallbackPatientName =
+    currentUser.fullname ||
+    currentUser.email?.split('@')[0] ||
+    'Patient';
 
-  // 👉 OPEN MODAL
   bookBtn.addEventListener('click', () => modal.show());
 
-  // 👉 SUBMIT FORM
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const patientInput = document.getElementById('patient-name');
-
     let patientName;
 
-    //Admin booking
     if (isAdmin) {
-      if (!patientInput || patientInput.value.trim()) {
-        toastMessage.textContent = " Please enter patient name";
+      const patientSelect = document.getElementById('patient-select');
+
+      if (!patientSelect || !patientSelect.value) {
+        toastMessage.textContent = "Please select a patient";
         toast.show();
         return;
       }
-      patientName = patientInput.value.trim();
+
+      patientName = patientSelect.value;
     } else {
-      //Normal user
-      patientName =
-        currentUser.firstName ||
-        (currentUser.fullname 
-          ? currentUser.fullname.split(' ')[0] 
-          : currentUser.email.split('@')[0]);
-        
+      patientName = fallbackPatientName;
     }
 
     const appointment = {
-      name: userName,
-      email: currentUser.email,
+      name: patientName,
+      email: document.getElementById('email').value,
       service: document.getElementById('service').value,
       date: document.getElementById('date').value,
       time: document.getElementById('time').value,
@@ -69,7 +56,7 @@ export function setupEvents(modal, toast) {
 
     addAppointment(appointment);
 
-    toastMessage.textContent = `✅ ${appointment.name} booked successfully`;
+    toastMessage.textContent = `Appointment for ${appointment.name} booked successfully`;
     toast.show();
 
     form.reset();
@@ -78,16 +65,13 @@ export function setupEvents(modal, toast) {
     renderAppointments();
   });
 
-  // ✅ HANDLE ALL BUTTONS
   document.addEventListener('click', (e) => {
-
     const button = e.target.closest('button');
     if (!button) return;
 
     const index = button.dataset.index;
     if (index === undefined) return;
 
-    // 👉 DELETE
     if (button.classList.contains('delete-btn') && isAdmin) {
       deleteAppointment(index);
       toastMessage.textContent = "Appointment deleted";
@@ -95,15 +79,13 @@ export function setupEvents(modal, toast) {
       renderAppointments();
     }
 
-    // 👉 STATUS
     if (button.classList.contains('status-btn') && isAdmin) {
       updateStatus(index);
-      toastMessage.textContent = "🔄 Status updated";
+      toastMessage.textContent = "Status updated";
       toast.show();
       renderAppointments();
     }
 
-    // 👉 EDIT
     if (button.classList.contains('edit-btn') && isAdmin) {
       const newDate = prompt('Enter new date:');
       const newTime = prompt('Enter new time:');
@@ -114,13 +96,10 @@ export function setupEvents(modal, toast) {
           ...(newTime && { time: newTime })
         });
 
-        toastMessage.textContent = "✏️ Appointment updated";
+        toastMessage.textContent = "Appointment updated";
         toast.show();
-
         renderAppointments();
       }
     }
-
   });
-
 }
