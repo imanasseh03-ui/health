@@ -22,6 +22,10 @@ export function setupEvents(modal, toast) {
     currentUser.fullname ||
     currentUser.email?.split('@')[0] ||
     'Patient';
+  const refreshAppointmentsView = () => {
+    renderAppointments();
+    document.dispatchEvent(new CustomEvent('appointments:changed'));
+  };
 
   bookBtn.addEventListener('click', () => modal.show());
 
@@ -62,7 +66,7 @@ export function setupEvents(modal, toast) {
     form.reset();
     modal.hide();
 
-    renderAppointments();
+    refreshAppointmentsView();
   });
 
   document.addEventListener('click', (e) => {
@@ -76,14 +80,14 @@ export function setupEvents(modal, toast) {
       deleteAppointment(index);
       toastMessage.textContent = "Appointment deleted";
       toast.show();
-      renderAppointments();
+      refreshAppointmentsView();
     }
 
     if (button.classList.contains('status-btn') && isAdmin) {
       updateStatus(index);
       toastMessage.textContent = "Status updated";
       toast.show();
-      renderAppointments();
+      refreshAppointmentsView();
     }
 
     if (button.classList.contains('edit-btn') && isAdmin) {
@@ -98,7 +102,7 @@ export function setupEvents(modal, toast) {
 
         toastMessage.textContent = "Appointment updated";
         toast.show();
-        renderAppointments();
+        refreshAppointmentsView();
       }
     }
   });

@@ -94,4 +94,59 @@ document.addEventListener('DOMContentLoaded', () => {
       appointmentEl.textContent = 'No upcoming appointments';
     }
   }
+
+  const searchInput = document.getElementById('search-input');
+  const searchButton = document.querySelector('.js-search-btn');
+  const serviceCards = Array.from(document.querySelectorAll('[data-service]'));
+  const servicesSection = document.getElementById('services');
+
+  const runServiceSearch = () => {
+    if (!searchInput || serviceCards.length === 0) return;
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (!query) {
+      serviceCards.forEach((card) => {
+        card.classList.remove('service-match', 'service-dim');
+      });
+      return;
+    }
+
+    let firstMatch = null;
+
+    serviceCards.forEach((card) => {
+      const haystack = card.dataset.service || '';
+      const isMatch = haystack.includes(query);
+
+      card.classList.toggle('service-match', isMatch);
+      card.classList.toggle('service-dim', !isMatch);
+
+      if (!firstMatch && isMatch) {
+        firstMatch = card;
+      }
+    });
+
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (firstMatch) {
+      setTimeout(() => {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 180);
+    }
+  };
+
+  if (searchButton) {
+    searchButton.addEventListener('click', runServiceSearch);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        runServiceSearch();
+      }
+    });
+  }
 });

@@ -3,257 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/style/styles.css">
-    <title>HealthCare Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style/styles.css">
+    <title>Health Is Wealth</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-heart-pulse"></i> Health Is Wealth</a>
+    <nav class="navbar navbar-expand-lg site-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#top">
+                <span class="brand-mark"><i class="fa-solid fa-heart-pulse"></i></span>
+                <span>Health Is Wealth</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-comments"></i> Chat 24/7</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-heart-pulse"></i> Urgent Care</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-stethoscope"></i> Consultation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-user-plus"></i> Join Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+                <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#care-path">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#stories">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
-              <!-- Auth Area -->
-<div class="d-flex align-items-center" id="auth-area">
-  <a href="login.html" class="btn btn-success" id="login-btn">
-  Signup/Login
-</a>
-</div>
-</button>
-<div id="auth-area"></div>
+                <div class="d-flex align-items-center" id="auth-area">
+                    <a href="login.html" class="btn btn-success" id="login-btn">Signup/Login</a>
+                </div>
             </div>
         </div>
     </nav>
-    <div class="container-fluid hero-container">
-        <div class="row">
-            <div class="col-md-6 hero-text-col">
-               <p class="hero-subtitle"><i class="fa-solid fa-plus"></i> Trusted Healthcare</p>
 
-<h1 class="hero-title">
-  Quality Care <br>
-  Anytime, Anywhere
-</h1>
+    <main id="top">
+        <section class="hero-shell">
+            <div class="container">
+                <div class="hero-panel">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6">
+                            <div class="hero-copy">
+                                <p class="eyebrow">Connected care platform</p>
+                                <h1 class="hero-title">Professional healthcare support for every stage of care.</h1>
+                                <p class="hero-desc">
+                                    Book appointments, monitor upcoming visits, and access trusted clinicians through a cleaner, faster digital experience built around patient confidence.
+                                </p>
 
-<p class="hero-desc">
-  Connect with certified doctors, book appointments, and access quality healthcare services 
-  from the comfort of your home.
-</p>
+                                <div class="search-bar">
+                                    <i class="fas fa-search"></i>
+                                    <input id="search-input" type="text" placeholder="Search services like dental, therapy, lab test">
+                                </div>
 
-<div class="search-bar">
-  <i class="fas fa-search"></i>
-  <input id="search-input" type="text" placeholder="Search doctors, services...">
-</div>
+                                <div class="hero-actions">
+                                    <button class="btn search-btn js-search-btn" type="button">Explore Services</button>
+                                    <a href="appointment-booking.html" class="btn book-now-btn">Book Appointment</a>
+                                </div>
 
-<div class="d-flex gap-3 flex-wrap">
-  <button class="btn search-btn js-search-btn">Search</button>
+                                <div class="hero-metrics">
+                                    <div class="metric-card">
+                                        <strong>24/7</strong>
+                                        <span>Care support</span>
+                                    </div>
+                                    <div class="metric-card">
+                                        <strong>98%</strong>
+                                        <span>Patient satisfaction</span>
+                                    </div>
+                                    <div class="metric-card">
+                                        <strong>12+</strong>
+                                        <span>Specialty services</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-  <a href="appointment-booking.html">
-    <button class="btn book-now-btn">Book Appointment</button>
-  </a>
-</div>
-        </div>
-    </div>
-
-    <div class="container urgent-care-container mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h2 class="text-white  py-5">Urgent Care</h2>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <p class="text-white mb-0">same-day doctor's appointment for diagnosis and treatment of medical <br> illnesses that are acute but do not pose an immediate threat to life and <br> health</p>
-                        <div>
-                            <i class="fa-solid fa-headset fa-2x text-white ms-3"></i> <br>
-                            <i class="fa-solid fa-first-aid fa-2x text-white ms-3"></i>
+                        <div class="col-lg-6">
+                            <div class="hero-visual">
+                                <div class="hero-image-stack">
+                                    <img src="imgs/doctor.jpg" alt="Doctor consulting with a patient" class="hero-main-image">
+                                    <div class="floating-card appointment-preview">
+                                        <p class="floating-label">Next appointment</p>
+                                        <p id="next-appointment" class="floating-value">No upcoming appointments</p>
+                                    </div>
+                                    <div class="floating-card support-chip">
+                                        <i class="fa-solid fa-headset"></i>
+                                        <span>Live nurse guidance</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="container services-container mt-5">
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">Our services</h2>
-                <p class="text-center">Our services are not limited to</p>
+                <div class="trust-strip">
+                    <div class="trust-item"><i class="fa-solid fa-shield-heart"></i><span>Secure patient records</span></div>
+                    <div class="trust-item"><i class="fa-solid fa-user-doctor"></i><span>Verified medical professionals</span></div>
+                    <div class="trust-item"><i class="fa-solid fa-clock"></i><span>Fast appointment turnaround</span></div>
+                    <div class="trust-item"><i class="fa-solid fa-laptop-medical"></i><span>Remote and in-person support</span></div>
+                </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card service-card">
-                        <div class="card-body text-center">
-                            <i class="fa-solid fa-heart-pulse service-icon"></i>
-                            <h5 class="card-title mt-3">Urgent Care</h5>
-                            <p class="card-text">
-                            Quick access to medical care for non-life-threatening conditions.
+        </section>
+
+        <section class="section-space" id="overview">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-kicker">Dashboard overview</p>
+                    <h2>Everything you need to manage care in one place.</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <article class="feature-panel feature-panel-accent">
+                            <div class="feature-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                            <h3>Appointment readiness</h3>
+                            <p>Get a quick view of your care timeline and keep important visits visible instead of buried in messages.</p>
+                            <a href="appointment-booking.html" class="feature-link">Open appointment center</a>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="feature-panel">
+                            <div class="feature-icon"><i class="fa-solid fa-notes-medical"></i></div>
+                            <h3>Clear service pathways</h3>
+                            <p>Navigate urgent care, consultations, wellness, and lab support from a homepage designed around patient decisions.</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="feature-panel">
+                            <div class="feature-icon"><i class="fa-solid fa-bell"></i></div>
+                            <h3>Useful notifications</h3>
+                            <p>Logged-in users can monitor pending appointments and stay updated from the top navigation without extra clicks.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space pt-0" id="urgent-care">
+            <div class="container">
+                <div class="urgent-care-container">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-8">
+                            <p class="section-kicker text-light mb-2">Priority access</p>
+                            <h2 class="urgent-title">Urgent care for conditions that need attention today.</h2>
+                            <p class="urgent-copy">
+                                Same-day guidance for acute illnesses, fast assessments, and practical next steps from clinicians who can triage your needs quickly and safely.
                             </p>
-                            <button class="btn btn-outline-success btn-sm">Learn More</button>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="urgent-stats">
+                                <div class="urgent-stat"><i class="fa-solid fa-headset"></i><span>Care support line</span></div>
+                                <div class="urgent-stat"><i class="fa-solid fa-first-aid"></i><span>Rapid treatment routing</span></div>
+                                <div class="urgent-stat"><i class="fa-solid fa-truck-medical"></i><span>Escalation guidance</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Chronic Diseases</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </section>
+
+        <section class="section-space" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-kicker">Core services</p>
+                    <h2>High-demand care services with a clearer patient experience.</h2>
+                    <p class="section-text">From quick consultations to long-term support, every service category is framed to help patients act with confidence.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="urgent care emergency same day consultation"><i class="fa-solid fa-heart-pulse service-icon"></i><h3>Urgent Care</h3><p>Quick access for infections, pain, fever, and non-life-threatening concerns that need immediate attention.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="consultation doctor general checkup primary care"><i class="fa-solid fa-stethoscope service-icon"></i><h3>Consultations</h3><p>Routine medical reviews, clinical advice, referrals, and follow-up conversations with qualified providers.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="mental health counselling therapy wellness"><i class="fa-solid fa-brain service-icon"></i><h3>Mental Health</h3><p>Private support for stress, burnout, anxiety, and emotional wellbeing with structured care pathways.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="lab laboratory diagnostics testing results"><i class="fa-solid fa-vials service-icon"></i><h3>Lab Tests</h3><p>Simple diagnostic booking for screenings, follow-up tests, and clinician-directed medical investigations.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="chronic disease diabetes hypertension long term management"><i class="fa-solid fa-kit-medical service-icon"></i><h3>Chronic Care</h3><p>Steady, trackable support for diabetes, hypertension, asthma, and other long-term health needs.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="women health amenorrhea reproductive care"><i class="fa-solid fa-person-dress service-icon"></i><h3>Women's Health</h3><p>Compassionate support for reproductive concerns, cycle irregularities, and preventive care planning.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="therapy rehabilitation physical recovery"><i class="fa-solid fa-hand-holding-medical service-icon"></i><h3>Therapy</h3><p>Recovery-focused support, guided treatment plans, and continuity after diagnosis or acute episodes.</p></article></div>
+                    <div class="col-md-6 col-xl-3"><article class="service-card" data-service="counselling family support coaching"><i class="fa-solid fa-comments service-icon"></i><h3>Counselling</h3><p>Patient-centered conversations that help individuals and families make informed care decisions.</p></article></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space care-path-section" id="care-path">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="image-feature">
+                            <img src="imgs/doctor2.jpg" alt="Healthcare professional assisting a patient" class="feature-image">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="section-heading text-start">
+                            <p class="section-kicker">Care journey</p>
+                            <h2>A smoother path from first question to booked appointment.</h2>
+                            <p class="section-text">The platform is designed to reduce friction and make the next step obvious whether you need urgent care, routine follow-up, or specialist support.</p>
+                        </div>
+                        <div class="path-list">
+                            <div class="path-step"><span class="path-number">1</span><div><h3>Search the right service</h3><p>Start with a symptom, care type, or service need and find the most relevant support track.</p></div></div>
+                            <div class="path-step"><span class="path-number">2</span><div><h3>Book in minutes</h3><p>Choose a date, time, and doctor without repeating your details when logged into your account.</p></div></div>
+                            <div class="path-step"><span class="path-number">3</span><div><h3>Track updates easily</h3><p>Use your dashboard notifications and appointment history to stay on top of pending visits.</p></div></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Mental Health</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </section>
+
+        <section class="section-space" id="stories">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-kicker">Patient stories</p>
+                    <h2>Confidence grows when care feels organized and human.</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4"><article class="testimonial-card"><div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>"Booking was straightforward, and I could immediately see what was pending without chasing anyone."</p><strong>John Doe</strong><span>Routine consultation patient</span></article></div>
+                    <div class="col-lg-4"><article class="testimonial-card"><div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>"The platform feels much more professional now. It is easy to understand where to click and what comes next."</p><strong>Aisha Bello</strong><span>Mental wellness patient</span></article></div>
+                    <div class="col-lg-4"><article class="testimonial-card"><div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p>"I like that my account, appointments, and notifications are all in one place instead of spread across pages."</p><strong>Musa Ibrahim</strong><span>Chronic care patient</span></article></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space pb-5" id="contact">
+            <div class="container">
+                <div class="contact-panel">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-lg-7">
+                            <p class="section-kicker mb-2">Need support?</p>
+                            <h2>Talk to the care team or book your next appointment today.</h2>
+                            <p>Reach out for assistance, use the appointment center, or explore the right service before your next visit.</p>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="contact-actions">
+                                <a href="appointment-booking.html" class="btn book-now-btn w-100">Book Appointment</a>
+                                <a href="login.html" class="btn btn-outline-light w-100">Manage Account</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Therapy</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Amenorrhea</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Counselling</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <div class="container testimonials-container mt-5">
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">What our patients say</h2>
-                <p class="text-center">Your valuable feedback is not taken for granted</p>
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>
+                <h3>Health Is Wealth</h3>
+                <p>Digital-first healthcare with a calmer, clearer patient experience.</p>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <img src="./imgs/doctor2.jpg" alt="Patient" class="img-fluid">
+            <div>
+                <h4>Services</h4>
+                <a href="#services">Urgent Care</a>
+                <a href="#services">Consultations</a>
+                <a href="#services">Lab Tests</a>
             </div>
-            <div id="testimonialCarousel" class="carousel slide mt-5">
-            <div class="carousel-inner text-center">
-
-                <div class="carousel-item active">
-                    <p>"Amazing service! Booking was easy and fast."</p>
-                    <strong>- John Doe</strong>
-                    </div>
-
-                    <div class="carousel-item ">
-                        <p>"Doctors are very professional and friendly."</p>
-                        <strong>- Aisha Bello</strong>
-                    </div>
-
-                    <div class="carousel-item">
-                        <p>"Best healthcare platform I’ve used!"</p>
-                        <strong>- Musa Ibrahim</strong>
-                    </div>
-
+            <div>
+                <h4>Company</h4>
+                <a href="#care-path">How It Works</a>
+                <a href="#stories">Reviews</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div>
+                <h4>Follow</h4>
+                <div class="social-row">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
         </div>
-    </div>
-
-        <footer class="footer mt-5">
-            <div class="container text-center">
-                <p>© 2026 HealthCare Dashboard</p>
-                <p>
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-twitter mx-2"></i>
-                <i class="fa-brands fa-instagram"></i>
-                </p>
-            </div>
-        </footer>
-
-    <!-- Appointment Booking Modal -->
-    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        
-        <div class="modal-header">
-            <h5 class="modal-title" id="appointmentModalLabel">Book an Appointment</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Health Is Wealth. All rights reserved.</p>
         </div>
+    </footer>
 
-        <div class="modal-body">
-            <form id="appointment-form">
-            <div class="mb-3">
-                <label class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="fullName" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Service</label>
-                <select class="form-select" id="service" required>
-                <option value="">Select a service</option>
-                <option>Urgent Care</option>
-                <option>Mental Health</option>
-                <option>Chronic Diseases</option>
-                <option>Therapy</option>
-                <option>Counselling</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Preferred Date</label>
-                <input type="date" class="form-control" id="date" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Message (Optional)</label>
-                <textarea class="form-control" rows="3" id="message"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-success w-100">
-                Book Appointment
-            </button>
-            </form>
-
-            <p id="appointment-success" class="text-success text-center mt-3 d-none">
-            ✅ Appointment booked successfully!
-            </p>
-        </div>
-
-        </div>
-    </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="/scripts/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1N7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>

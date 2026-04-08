@@ -3,150 +3,211 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <title>Book an Appointment</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style/appointment-booking.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="text-center py-5 bg-light">
-    <h1 class="display-5 fw-bold">Book Your Appointment</h1>
-    <p class="lead">Schedule your appointment and see all your upcoming bookings below.</p>
+  <div class="booking-page-shell">
+    <header class="booking-hero">
+      <div class="container">
+        <nav class="topbar">
+          <a href="index.html" class="brand-link">
+            <span class="brand-icon">+</span>
+            <span>Health Is Wealth</span>
+          </a>
+          <a href="index.html" class="back-link">Back to dashboard</a>
+        </nav>
 
-    <div class="container mb-4">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Appointment center</p>
+            <h1>Book care with confidence and manage upcoming visits in one place.</h1>
+            <p class="hero-text">
+              A more professional booking flow for consultations, lab tests, dental visits, and routine care. Choose a date, confirm the details, and keep track of every appointment below.
+            </p>
 
-  <div class="row g-3">
+            <div class="hero-actions">
+              <button class="btn btn-success btn-lg js-book-now-btn">Book Appointment</button>
+              <a href="#appointments-section" class="btn btn-outline-light btn-lg">View My Appointments</a>
+            </div>
 
-    <!-- Search -->
-    <div class="col-md-4">
-      <input 
-        type="text" 
-        id="search-appointment" 
-        class="form-control" 
-        placeholder="Search by patient name">
-    </div>
+            <div class="hero-assurance-grid">
+              <div class="assurance-card">
+                <strong>Same-day options</strong>
+                <span>Fast access for urgent support</span>
+              </div>
+              <div class="assurance-card">
+                <strong>Structured booking</strong>
+                <span>Clear fields and cleaner records</span>
+              </div>
+              <div class="assurance-card">
+                <strong>Status visibility</strong>
+                <span>Track pending and confirmed care</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- Filter by Service -->
-    <div class="col-md-4">
-      <select id="filter-service" class="form-select">
-        <option value="all">Filter by Service</option>
-        <option value="General Consultation">General Consultation</option>
-        <option value="Dental Checkup">Dental Checkup</option>
-        <option value="Eye Examination">Eye Examination</option>
-        <option value="Laboratory Test">Laboratory Test</option>
-      </select>
-    </div>
+          <aside class="hero-side-panel">
+            <div class="side-panel-card">
+              <p class="panel-label">Booking snapshot</p>
+              <h2 id="dashboard-greeting">Ready for your next visit</h2>
+              <p class="panel-text">Your account details are used automatically where possible, reducing errors and saving time during booking.</p>
 
-    <!-- Sort -->
-    <div class="col-md-2">
-      <select id="sort-date" class="form-select">
-        <option value="none">Sort by Date</option>
-        <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
-      </select>
-    </div>
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <span>Total</span>
+                  <strong id="total-appointments-count">0</strong>
+                </div>
+                <div class="stat-card">
+                  <span>Pending</span>
+                  <strong id="pending-appointments-count">0</strong>
+                </div>
+                <div class="stat-card">
+                  <span>Completed</span>
+                  <strong id="completed-appointments-count">0</strong>
+                </div>
+              </div>
 
-    <!-- Clear All -->
-    <div class="col-md-2">
-      <button id="clear-appointments" class="btn btn-danger w-100">
-        Clear All
-      </button>
-    </div>
+              <div class="care-note">
+                <p class="panel-label mb-2">Care reminders</p>
+                <ul class="care-note-list">
+                  <li>Choose the right service before confirming.</li>
+                  <li>Appointments start as pending until reviewed.</li>
+                  <li>Admins can manage bookings for patients directly.</li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
 
+    <main class="booking-main">
+      <section class="container appointment-summary-band">
+        <div class="summary-tile">
+          <p class="tile-label">Next action</p>
+          <h3>Open the booking form</h3>
+          <p>Use the guided form to schedule a new visit in under a minute.</p>
+        </div>
+        <div class="summary-tile">
+          <p class="tile-label">Account-aware flow</p>
+          <h3>User details auto-filled</h3>
+          <p>Logged-in users book against their own account without re-entering personal details.</p>
+        </div>
+        <div class="summary-tile">
+          <p class="tile-label">Appointment tracking</p>
+          <h3>Monitor changes easily</h3>
+          <p>See booking status and upcoming care details in a clean card-based layout.</p>
+        </div>
+      </section>
+
+      <section class="container appointments-section" id="appointments-section">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow mb-2">Appointments</p>
+            <h2>My Appointments</h2>
+            <p class="section-text">Review your upcoming and past bookings, or update records if you are managing appointments as an admin.</p>
+          </div>
+          <button class="btn btn-success section-cta js-book-now-btn" type="button">New Appointment</button>
+        </div>
+
+        <div id="empty-state" class="empty-state-card">
+          <div class="empty-state-icon">+</div>
+          <h3>No appointments yet</h3>
+          <p>Your scheduled visits will appear here once you complete your first booking.</p>
+          <button class="btn btn-success js-book-now-btn" type="button">Book your first appointment</button>
+        </div>
+
+        <div id="appointments-list" class="row g-4"></div>
+      </section>
+    </main>
   </div>
 
-</div>
-  </header>
-
-
-  <!-- Book Appointment Button -->
-  <div class="text-center my-4">
-    <button class="btn btn-success btn-lg js-book-now-btn">Book Appointment</button>
-  </div>
-
-  <!-- Appointment Modal -->
   <div class="modal fade" id="appointmentModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-        <!-- Modal Header -->
-        <div class="modal-header bg-success text-white">
-          <h5 class="modal-title">Book Appointment</h5>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content appointment-modal">
+        <div class="modal-header modal-header-custom">
+          <div>
+            <p class="modal-kicker">Secure booking form</p>
+            <h5 class="modal-title">Book Appointment</h5>
+          </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
 
-        <!-- Modal Body -->
-        <div class="modal-body">
+        <div class="modal-body p-4 p-lg-5">
           <form id="appointment-form">
-
-            <div class="input-group admin-only d-none mb-3" id="patient-select-group">
-              <label for="patient-select" class="form-label">Select Patient</label>
-                <select 
-                  id="patient-select" 
-                  class="form-select"
-                  required
-                >
+            <div class="row g-3">
+              <div class="col-12 admin-only d-none" id="patient-select-group">
+                <label for="patient-select" class="form-label">Select Patient</label>
+                <select id="patient-select" class="form-select" required>
                   <option value="">Choose a patient</option>
                 </select>
-              </div> 
+              </div>
 
-            <div class="mb-3" id="email-group">
-              <label class="form-label">Email</label>
-              <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-            </div>
+              <div class="col-12" id="email-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+              </div>
 
-            <div class="mb-3 d-none" id="account-summary">
-              <label class="form-label">Booking For</label>
-              <div class="form-control bg-light">
-                <strong id="account-name"></strong><br>
-                <small id="account-email" class="text-muted"></small>
+              <div class="col-12 d-none" id="account-summary">
+                <label class="form-label">Booking For</label>
+                <div class="account-summary-card">
+                  <strong id="account-name"></strong>
+                  <small id="account-email"></small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="gender">Gender</label>
+                <select id="gender" class="form-select" required>
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="service">Select Service</label>
+                <select id="service" class="form-select" required>
+                  <option value="">Choose a service</option>
+                  <option value="General Consultation">General Consultation</option>
+                  <option value="Dental Checkup">Dental Checkup</option>
+                  <option value="Eye Examination">Eye Examination</option>
+                  <option value="Laboratory Test">Laboratory Test</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="doctor">Doctor</label>
+                <input type="text" id="doctor" class="form-control" placeholder="Enter doctor's name" required>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label" for="time">Time</label>
+                <input type="time" id="time" class="form-control" required>
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label" for="date">Appointment Date</label>
+                <input type="date" id="date" class="form-control" required>
               </div>
             </div>
 
-            <div class="mb-3">
-              <label class="form-label">Gender</label>
-              <select id="gender" class="form-select" required>
-                <option value="">Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
+            <div class="form-footer">
+              <p class="form-helper">Appointments are created with a pending status and can be reviewed after submission.</p>
+              <button type="submit" class="btn btn-success submit-btn">Confirm Appointment</button>
             </div>
-
-            <div class="mb-3">
-              <label class="form-label">Select Service</label>
-              <select id="service" class="form-select" required>
-                <option value="">Choose a service</option>
-                <option value="General Consultation">General Consultation</option>
-                <option value="Dental Checkup">Dental Checkup</option>
-                <option value="Eye Examination">Eye Examination</option>
-                <option value="Laboratory Test">Laboratory Test</option>
-              </select>
-            </div>
-
-                        <div class="mb-3">
-              <label class="form-label">Doctor</label>
-              <input type="text" id="doctor" class="form-control" placeholder="Enter doctor's name" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Time</label>
-              <input type="time" id="time" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Appointment Date</label>
-              <input type="date" id="date" class="form-control" required>
-            </div>
-
-            <button type="submit" class="btn btn-success w-100">Confirm Appointment</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+  <div class="position-fixed top-0 end-0 p-3 toast-wrap">
     <div id="appointmentToast" class="toast align-items-center text-bg-success border-0" role="alert">
       <div class="d-flex">
         <div class="toast-body" id="toast-message">Appointment booked successfully!</div>
@@ -155,14 +216,7 @@
     </div>
   </div>
 
-  <!-- My Appointments Section -->
-  <section class="container py-5">
-    <h2 class="mb-4 text-center">My Appointments</h2>
-    <div id="appointments-list" class="row g-4"></div>
-  </section>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="scripts/appointment-booking.js"></script>
-
 </body>
 </html>
