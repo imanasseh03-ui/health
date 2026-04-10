@@ -16,9 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const appointments =
     JSON.parse(localStorage.getItem('health-appointments')) || [];
+  const accountName =
+    currentUser.fullname ||
+    currentUser.firstName ||
+    currentUser.email.split('@')[0];
+  const role = currentUser.role || 'user';
+  const visibleAppointments = role === 'admin'
+    ? appointments
+    : appointments.filter((appointment) => appointment.name === accountName);
+  const pendingAppointments =
+    visibleAppointments.filter((appointment) => appointment.status === 'pending');
 
   const pendingCount =
-    appointments.filter((a) => a.status === 'pending').length;
+    pendingAppointments.length;
 
   const authArea = document.getElementById('auth-area');
 
@@ -28,17 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
       (currentUser.fullname ? currentUser.fullname.split(' ')[0] : null) ||
       currentUser.email.split('@')[0];
 
-    const role = currentUser.role || 'user';
-
     authArea.innerHTML = `
       <div class="d-flex align-items-center gap-3">
         <div class="notification-bell position-relative dropdown">
-          <i class="fa-solid fa-bell fs-5 dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;"></i>
+          <button
+            class="btn notification-toggle dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bell fs-5"></i>
+          </button>
           ${pendingCount > 0 ? `<span class="notif-badge">${pendingCount}</span>` : ''}
           <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 300px;">
             <li class="dropdown-header">Notifications</li>
             <li><hr class="dropdown-divider"></li>
-            ${pendingCount > 0 ? appointments.filter((a) => a.status === 'pending').map((appt) => `
+            ${pendingCount > 0 ? pendingAppointments.map((appt) => `
               <li class="dropdown-item">
                 <strong>${appt.service}</strong><br>
                 <small>${appt.name} - ${appt.date} at ${appt.time}</small>
@@ -48,7 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <div class="dropdown">
-          <button class="btn user-btn dropdown-toggle" data-bs-toggle="dropdown">
+          <button
+            class="btn user-btn dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             ${name}
             ${role === 'admin' ? '<span class="admin-badge">ADMIN</span>' : ''}
           </button>
@@ -76,6 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
+    authArea.querySelectorAll('[data-bs-toggle="dropdown"]').forEach((toggle) => {
+      bootstrap.Dropdown.getOrCreateInstance(toggle);
+    });
+
     document.getElementById('logout-btn').addEventListener('click', () => {
       localStorage.removeItem(CURRENT_USER_KEY);
       window.location.href = 'login.html';
@@ -85,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const appointmentEl = document.getElementById('next-appointment');
 
   if (appointmentEl) {
-    if (appointments.length > 0) {
-      const next = appointments[appointments.length - 1];
+    if (visibleAppointments.length > 0) {
+      const next = visibleAppointments[visibleAppointments.length - 1];
 
       appointmentEl.textContent =
         `${next.service} with ${next.doctor} on ${next.date} at ${next.time}`;
