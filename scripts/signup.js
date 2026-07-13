@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const USER_KEY = 'health_users';
+    const NOTIFICATION_KEY = 'health_notifications';
 
     /* =========================
      HELPERS
@@ -87,6 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
             password
           });
             localStorage.setItem(USER_KEY, JSON.stringify(users));
+
+            const notificationsRaw = localStorage.getItem(NOTIFICATION_KEY);
+            const notifications = notificationsRaw ? JSON.parse(notificationsRaw) : [];
+
+            notifications.unshift({
+                type: 'user_signup',
+                audience: 'admin',
+                title: 'New user registered',
+                detail: `${fullname} created an account with ${email}`,
+                createdAt: new Date().toISOString()
+            });
+
+            localStorage.setItem(NOTIFICATION_KEY, JSON.stringify(notifications));
 
             showSuccess('Account created successfully! Redirecting to login...');
 

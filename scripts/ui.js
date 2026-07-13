@@ -6,10 +6,16 @@ export function renderAppointments() {
   const emptyState = document.getElementById('empty-state');
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
+  if (!list) return;
+
   let appointments = getAppointments();
+  const currentPatientName =
+    currentUser?.fullname ||
+    currentUser?.firstName ||
+    currentUser?.email?.split('@')[0];
 
   if (currentUser?.role !== 'admin') {
-    appointments = appointments.filter((app) => app.name === currentUser.fullname);
+    appointments = appointments.filter((app) => app.name === currentPatientName);
   }
 
   if (appointments.length === 0) {
@@ -17,7 +23,7 @@ export function renderAppointments() {
     if (emptyState) emptyState.style.display = 'block';
     return;
   }
-
+  
   if (emptyState) emptyState.style.display = 'none';
 
   if (currentUser?.role === 'admin') {

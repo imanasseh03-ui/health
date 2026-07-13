@@ -751,6 +751,7 @@ img {
   line-height: 1;
   padding: 0.28rem 0.4rem;
   border-radius: 999px;
+  pointer-events: none;
 }
 
 #next-appointment {

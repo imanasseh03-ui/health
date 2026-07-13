@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const CURRENT_USER_KEY = 'currentUser';
+  const navbarCollapse = document.getElementById('navbarNav');
+  const navLinks = Array.from(document.querySelectorAll('.navbar .nav-link'));
 
   let currentUser;
 
@@ -16,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const appointments =
     JSON.parse(localStorage.getItem('health-appointments')) || [];
+  const storedNotifications =
+    JSON.parse(localStorage.getItem('health_notifications')) || [];
   const accountName =
     currentUser.fullname ||
     currentUser.firstName ||
@@ -23,12 +27,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const role = currentUser.role || 'user';
   const visibleAppointments = role === 'admin'
     ? appointments
-    : appointments.filter((appointment) => appointment.name === accountName);
+    : appointments.filter((appointment) => appointment.email === currentUser.email);
   const pendingAppointments =
     visibleAppointments.filter((appointment) => appointment.status === 'pending');
+  const adminNotifications = role === 'admin'
+    ? storedNotifications.filter((notification) => notification.audience === 'admin')
+    : [];
+
+  const notificationItems = [
+    ...adminNotifications.map((notification) => ({
+      title: notification.title,
+      detail: notification.detail,
+      createdAt: notification.createdAt || ''
+    })),
+    ...pendingAppointments.map((appointment) => ({
+      title: `${appointment.service} appointment pending`,
+      detail: `${appointment.date} at ${appointment.time}${appointment.doctor ? ` with ${appointment.doctor}` : ''}`,
+      createdAt: `${appointment.date}T${appointment.time || '00:00'}`
+    }))
+  ].sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
   const pendingCount =
-    pendingAppointments.length;
+    notificationItems.length;
 
   const authArea = document.getElementById('auth-area');
 
@@ -44,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <button
             class="btn notification-toggle dropdown-toggle"
             type="button"
-            data-bs-toggle="dropdown"
+            data-dropdown-toggle="notifications"
             aria-expanded="false"
           >
             <i class="fa-solid fa-bell fs-5"></i>
@@ -53,12 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 300px;">
             <li class="dropdown-header">Notifications</li>
             <li><hr class="dropdown-divider"></li>
-            ${pendingCount > 0 ? pendingAppointments.map((appt) => `
+            ${pendingCount > 0 ? notificationItems.map((notification) => `
               <li class="dropdown-item">
-                <strong>${appt.service}</strong><br>
-                <small>${appt.name} - ${appt.date} at ${appt.time}</small>
+                <strong>${notification.title}</strong><br>
+                <small>${notification.detail}</small>
               </li>
-            `).join('') : '<li class="dropdown-item text-muted">No new notifications</li>'}
+            `).join('') : '<li class="dropdown-item text-muted">No notifications yet</li>'}
           </ul>
         </div>
 
@@ -66,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <button
             class="btn user-btn dropdown-toggle"
             type="button"
-            data-bs-toggle="dropdown"
+            data-dropdown-toggle="user-menu"
             aria-expanded="false"
           >
             ${name}
@@ -96,8 +116,46 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    authArea.querySelectorAll('[data-bs-toggle="dropdown"]').forEach((toggle) => {
-      bootstrap.Dropdown.getOrCreateInstance(toggle);
+    const dropdownToggles = Array.from(authArea.querySelectorAll('[data-dropdown-toggle]'));
+    const closeAuthDropdowns = () => {
+      authArea.querySelectorAll('.dropdown-menu').forEach((menu) => {
+        menu.classList.remove('show');
+      });
+
+      dropdownToggles.forEach((toggle) => {
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    };
+
+    dropdownToggles.forEach((toggle) => {
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const dropdown = toggle.closest('.dropdown');
+        const menu = dropdown?.querySelector('.dropdown-menu');
+        if (!menu) return;
+
+        const shouldOpen = !menu.classList.contains('show');
+        closeAuthDropdowns();
+
+        if (shouldOpen) {
+          menu.classList.add('show');
+          toggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!authArea.contains(event.target)) {
+        closeAuthDropdowns();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeAuthDropdowns();
+      }
     });
 
     document.getElementById('logout-btn').addEventListener('click', () => {
@@ -110,10 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (appointmentEl) {
     if (visibleAppointments.length > 0) {
-      const next = visibleAppointments[visibleAppointments.length - 1];
+      const sortedAppointments = [...visibleAppointments].sort((a, b) =>{
+        return new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`);
+      })
+      const next = sortedAppointments[0];
 
       appointmentEl.textContent =
-        `${next.service} with ${next.doctor} on ${next.date} at ${next.time}`;
+        `${next.service}${next.doctor ? ` with ${next.doctor}` : ''} on ${next.date} at ${next.time}`;
     } else {
       appointmentEl.textContent = 'No upcoming appointments';
     }
@@ -173,4 +234,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  const closeNavbarMenu = () => {
+    if (!navbarCollapse || !navbarCollapse.classList.contains('show')) return;
+
+    if (window.bootstrap && navbarCollapse) {
+      bootstrap.Collapse.getOrCreateInstance(navbarCollapse).hide();
+    }
+  };
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const targetId = link.getAttribute('href');
+
+      if (!targetId || !targetId.startsWith('#')) return;
+
+      const targetSection = document.querySelector(targetId);
+      if (!targetSection) return;
+
+      event.preventDefault();
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeNavbarMenu();
+    });
+  });
+
+  const setActiveNavLink = () => {
+    if (navLinks.length === 0) return;
+
+    const scrollPosition = window.scrollY + 140;
+    let activeId = '#top';
+
+    navLinks.forEach((link) => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || !targetId.startsWith('#')) return;
+
+      const section = document.querySelector(targetId);
+      if (!section) return;
+
+      if (scrollPosition >= section.offsetTop) {
+        activeId = targetId;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === activeId);
+    });
+  };
+
+  window.addEventListener('scroll', setActiveNavLink, { passive: true });
+  setActiveNavLink();
 });
